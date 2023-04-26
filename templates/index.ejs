@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+     crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">To-do List</h1>
+
+        <form class="row g-3" action="/" method="POST">
+            <div class="col-auto">
+                <label for="task" class="form-label">Task</label>
+                <input type="text" class="form-control" id="task" name="task" required>
+            </div>
+            <div class="col-auto">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Submit task</button>
+            </div>
+        </form>
+
+        <%for(let i=0; i < tasks.length; i++){%>
+
+            <div id="<%=tasks[i]._id%>" class="card mb-3">
+                <div class="card-body">
+                    <form method="POST" action="/?_method=DELETE">
+                        <h4 class="card-title"><%=tasks[i].task%></h4>
+                        <p class="card-text"><%=tasks[i].description%></p>
+                        <p class="card-text"><small><%=tasks[i].date%></small></p>
+                        <input name="id" value="<%=tasks[i]._id%>" hidden>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                        <a href="/edit/<%=tasks[i]._id%>" class="btn btn-primary">Edit Task</a>
+                    </form>
+                </div>
+            </div>
+
+        <% } %>
+    </div>
+
+
+</body>
+</html>
